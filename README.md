@@ -3,18 +3,18 @@ RaspberryAwards
 
 # Golden Raspberry Awards API
 
-Esta API fornece uma lista de indicados e vencedores do Pior Filme do Golden Raspberry Awards e o produtor com maior intervalo entre dois prêmios, e o que obteve dois prêmios mais rápido.
+Esta API fornece uma lista de indicados e vencedores do Pior Filme do Golden Raspberry Awards e o produtor com maior intervalo entre dois prÃªmios, e o que obteve dois prÃªmios mais rÃ¡pido.
 
-A aplicação obtém a lista de indicados de um arquivo .csv e salva em um banco de dados em memória.
+A aplicaÃ§Ã£o obtÃ©m a lista de indicados de um arquivo .csv e salva em um banco de dados em memÃ³ria.
 
 Para resolver esse caso utilizou-se Apache Camel seguindo os seguintes passos:
 
-1. Configuração do caminho do arquivo de leitura CSV no _application.properties_
-2. Usa transação para assegurar que se um erro ocorrer será feito rolled back
+1. ConfiguraÃ§Ã£o do caminho do arquivo de leitura CSV no _application.properties_
+2. Usa transaÃ§Ã£o para assegurar que se um erro ocorrer serÃ¡ feito rolled back
 3. Uso do Camel Bindy para transformar dados do CSV em POJO
-4. Uso do padrão Splitter para transmitir a mensagem
+4. Uso do padrÃ£o Splitter para transmitir a mensagem
 5. Uso de um bean para converter e tratar os dados
-6. Uso do padrão de integração Aggregator para agregar os POJOs em uma List
+6. Uso do padrÃ£o de integraÃ§Ã£o Aggregator para agregar os POJOs em uma List
 9. Uso de um processador jpa via Camel para persistir a lista em batch no banco de dados
 
 ### Splitter EIP:
@@ -39,37 +39,36 @@ _MovieListCSVRoute.java_
 ```
 
 
-## Pré-requisitos
+## PrÃ©-requisitos
 * Java 1.8
 * Apache Maven 3.0+
 
-## Dependências
+## DependÃªncias
 * Spring Boot: 2.1.5.RELEASE
 * Apache Camel: 3.0.0-RC2
 * Banco de Dados HSQL
 
 
-## Instalação
+## Executando a aplicaÃ§Ã£o
 ```
-mvn clean install
+mvn spring-boot:run
 ```
 
-## Executando testes de integração
+
+
+## Executando testes
 ```
 mvn test
 ```
 
-São cobertos os seguintes casos de testes de integração:
-- Teste do controler para os métodos POST, GET
-- Teste do controler para obter um indicado por ID
-- Teste do controller para obter os intervalos entre os prêmios dos produtores
-- Teste do arquivo de leitura CSV e da definição do caminho do arquivo
 
-
-## Executando a aplicação
-```
-mvn spring-boot:run
-```
+SÃ£o cobertos os seguintes casos de testes:
+- Teste do controller para o validaÃ§Ã£o dos dados do mÃ©todo /intervals
+- Teste unitÃ¡rio do service para o cÃ¡lculo dos intervalos
+- Teste do controller para os mÃ©todos POST, GET
+- Teste do controller para obter um indicado por ID
+- Teste do controller para obter os intervalos entre os prÃªmios dos produtores
+- Teste do arquivo de leitura CSV e da definiÃ§Ã£o do caminho do arquivo
 
 
 ## obtendo a lista de indicados
@@ -98,7 +97,7 @@ mvn spring-boot:run
     .
 ```
 
-## obtendo os intervalos entre os  prêmios dos produtores
+## obtendo os intervalos entre os  prÃªmios dos produtores
 ```GET http://localhost:8181/nominees/intervals```
 
 ```
@@ -111,8 +110,8 @@ mvn spring-boot:run
     },
     "max": {
         "producer": "Matthew Vaughn",
-        "interval": 13,
-        "previousWin": 2002,
+        "interval": 35,
+        "previousWin": 1980,
         "followingWin": 2015
     }
 }
@@ -120,17 +119,17 @@ mvn spring-boot:run
 
 
 
-## configurações
+## configuraÃ§Ãµes
 
-outras configurações editadas no arquivo _application.properties_:
+outras configuraÃ§Ãµes editadas no arquivo _application.properties_:
 
-### caminho padrão do arquivo CSV
+### caminho padrÃ£o do arquivo CSV
 ```
 source.location=src/main/resources
 source.file=movielist.csv
 ```
 
-### porta padrão da aplicação
+### porta padrÃ£o da aplicaÃ§Ã£o
 ```
 server.port=8181
 ```
