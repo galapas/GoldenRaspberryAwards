@@ -1,5 +1,6 @@
 package com.texo.raspberryawards.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -54,7 +55,10 @@ public class NomineeController {
 	
 	@GetMapping("/intervals")
 	public PrizeIntervals prizeIntervals() {
-		return nomineeService.prizeIntervals();
+		// BUSCA OS INDICADOS ORDENADOS POR ANO
+		List<Nominee> nominees = nomineeService.findByOrderByYearAsc();
+		
+		return nomineeService.prizeIntervals(nominees);
 	}
 
 }

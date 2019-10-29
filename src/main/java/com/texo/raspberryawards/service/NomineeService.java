@@ -1,9 +1,7 @@
 package com.texo.raspberryawards.service;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -12,8 +10,6 @@ import com.texo.raspberryawards.model.Nominee;
 import com.texo.raspberryawards.model.PrizeInterval;
 import com.texo.raspberryawards.model.PrizeIntervals;
 import com.texo.raspberryawards.repository.NomineeRepository;
-
-import lombok.extern.java.Log;
 
 @Service
 public class NomineeService {
@@ -40,10 +36,12 @@ public class NomineeService {
 		return nomineeRepository.save(nominee);
 	}
 	
-	public PrizeIntervals prizeIntervals() {
-		// BUSCA OS INDICADOS ORDENADOS POR ANO
-		ArrayList<Nominee> nominees = (ArrayList<Nominee>) nomineeRepository.findByOrderByYearAsc();
-		
+	public List<Nominee> findByOrderByYearAsc(){
+		return nomineeRepository.findByOrderByYearAsc();
+	}
+	
+	
+	public PrizeIntervals prizeIntervals(List<Nominee> nominees) {
 		ArrayList<String> allProducers = new ArrayList<String>();
 		
 		// TRATA OS NOMES DOS PRODUTORES SEPARADOS POR ',' e 'and'
